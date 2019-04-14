@@ -5,7 +5,7 @@ class Motor:
     def __init__(self, port):
         self.serial = serial.Serial(port, 115200)
         self.serial.write("y")
-        self.serial.write("x")
+        self.serial.write("t")
 
     def step(self, numSteps):
         for i in range(numSteps):
@@ -13,7 +13,6 @@ class Motor:
 
     def drive(self, pos):
         pass
-
 
 
 left_motor = Motor("/dev/ttyACM0")

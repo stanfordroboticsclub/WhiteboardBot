@@ -22,7 +22,7 @@ class Rotations:
         self.right = 0
 
 
-WIDTH = 1000 # constant which keeps track of width of canvas
+WIDTH = 1000 # constant which keeps track of width - distance between motors of canvas
 HEIGHT = 1000 # constant which keeps track of height of canvas
 
 CIRCUMFERENCE = 1.3 # 13 millimeters
