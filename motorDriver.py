@@ -4,7 +4,7 @@ import serial
 class Motor:
     def __init__(self, port):
         self.serial = serial.Serial(port, 115200)
-        self.serial.write("y")
+        self.serial.write("n")
         self.serial.write("t")
 
     def step(self, numSteps):
