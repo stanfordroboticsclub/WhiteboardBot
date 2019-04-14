@@ -4,7 +4,7 @@ import time
 class Motor:
     def __init__(self, port):
         self.serial = serial.Serial(port, 115200)
-        self.serial.write("x")
+        self.serial.write("x") # should probably only use one line for these writes
         self.serial.write("y")
         self.serial.write("r0")
         self.angle = 0
