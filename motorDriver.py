@@ -21,7 +21,7 @@ right_motor = Motor("/dev/ttyACM1")
 
 #figure out how to read all lines
 
-for i in range(50):
+for i in range(150):
     left_motor.step(1)
     right_motor.step(1)
 
