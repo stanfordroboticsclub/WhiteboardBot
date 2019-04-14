@@ -1,15 +1,16 @@
 import serial
-
+import time
 
 class Motor:
     def __init__(self, port):
         self.serial = serial.Serial(port, 115200)
-        self.serial.write("n")
-        self.serial.write("t")
+        self.serial.write("nxr0")
+        self.angle = 0
 
-    def step(self, numSteps):
-        for i in range(numSteps):
-            self.serial.write("s")
+    def move(self, angleChange):
+        self.angle = self.angle + angleChange
+        self.serial.write("r")
+        self.serial.write(self.angle)        
 
     def drive(self, pos):
         pass
@@ -18,9 +19,12 @@ class Motor:
 left_motor = Motor("/dev/ttyACM0")
 right_motor = Motor("/dev/ttyACM1")
 
-#figure out how to read all lines
+time.sleep(5)
 
-for i in range(150):
-    left_motor.step(1)
-    right_motor.step(1)
+#figure out how to read all lines
+move(left_motor, 360)
+move(right_motor, 360)
+
+move(left_motor, -360)
+move(right_motor, -360)
 
