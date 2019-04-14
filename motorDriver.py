@@ -16,6 +16,10 @@ class Motor:
         self.serial.write(str(self.angle))
         print("moving %d" %(angleChange))
 
+    def getPosition(self):
+        angle = self.serial.write("p")
+        return float(angle)
+
     def drive(self, pos):
         pass
 
@@ -29,12 +33,18 @@ right_motor = Motor("/dev/ttyACM1")
 time.sleep(5)
 
 #figure out how to read all lines
-left_motor.move(360)
-time.sleep(.1)
-right_motor.move(360)
 
-left_motor.move(-360)
-right_motor.move(-360)
+#left_motor.move(360)
+#time.sleep(.1)
+#right_motor.move(360)
 
+#left_motor.move(-360)
+#right_motor.move(-360)
+
+for i in range(100):
+    left_motor.move(10)
+    right_motor.move(10)
+    print(left_motor.getPosition())
+    print(right_motor.getPosition())
 
 
