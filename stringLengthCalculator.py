@@ -58,24 +58,24 @@ def get_rotations_in_degrees(current_string_lengths, desired_string_lengths):
 
 global_string_lengths.left = 0
 global_string_lengths.right = 0
-while 1:
-    newX = float(input("what x coordinate do you want to go to? (from 0 to {}) ".format(WIDTH)))
-    newY = float(input("y coordinate? (from 0 to {}) ".format(HEIGHT)))
-    new_string_pair = coordinate_to_string_length(newX, newY)
+#while 1:
+newX = float(input("what x coordinate do you want to go to? (from 0 to {}) ".format(WIDTH)))
+newY = float(input("y coordinate? (from 0 to {}) ".format(HEIGHT)))
+new_string_pair = coordinate_to_string_length(newX, newY)
 
-#    print("Your left string should have length", new_string_pair.left)
-#    print("Your right string should have length", new_string_pair.right)
+#print("Your left string should have length", new_string_pair.left)
+#print("Your right string should have length", new_string_pair.right)
 
-    string_pair_change = get_string_length_change(global_string_lengths, new_string_pair)
+string_pair_change = get_string_length_change(global_string_lengths, new_string_pair)
 
-#    print("Your left string change should be", string_pair_change.left)
-#    print("Your right string change should be", string_pair_change.right)
+#print("Your left string change should be", string_pair_change.left)
+#print("Your right string change should be", string_pair_change.right)
 
-    rotations_pair_change = get_rotations_in_degrees(global_string_lengths, new_string_pair)
+rotations_pair_change = get_rotations_in_degrees(global_string_lengths, new_string_pair)
 
-    print("Your left motor change should be (in degrees)", rotations_pair_change.left)
-    print("Your right motor change should be (in degrees)", rotations_pair_change.right)
+print("Your left motor change should be (in degrees)", rotations_pair_change.left)
+print("Your right motor change should be (in degrees)", rotations_pair_change.right)
 
-    print("------------------------- end --------------------------")
+print("------------------------- end --------------------------")
 
-    global_string_lengths = new_string_pair
+global_string_lengths = new_string_pair

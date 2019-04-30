@@ -1,5 +1,6 @@
 import serial
 import time
+import math
 
 class Motor:
     def __init__(self, port):
@@ -8,43 +9,67 @@ class Motor:
         self.serial.write("y")
         self.serial.write("r0")
         self.angle = 0
+        time.sleep(.1)
         print("motor initialized")
 
     def move(self, angleChange):
         self.angle = self.angle + angleChange
-        self.serial.write("r")
-        self.serial.write(str(self.angle))
-        print("moving %d" %(angleChange))
+#        print("the self.angle is %d" %(self.angle))
+        self.serial.write("r%d" %(self.angle))
 
     def getPosition(self):
-        angle = self.serial.write("p")
+        self.serial.reset_input_buffer()
+        self.serial.write("p")
+        anglePrintout = self.serial.readline()
+        angleSplit = anglePrintout.split(' ')
+        while angleSplit[0] != "stepNumber:": 
+              print(angleSplit)
+              anglePrintout = self.serial.readline()
+              angleSplit = anglePrintout.split(' ')
+        print(angleSplit)
+        angle = angleSplit[4]
+        angle = angle[:-1]
+        time.sleep(.1)
+        self.serial.write("x")
+        time.sleep(.1)
+        self.serial.write("y")
+        time.sleep(.1)
         return float(angle)
 
     def drive(self, pos):
         pass
 
 
+
+#start by initializing motors
 left_motor = Motor("/dev/ttyACM0")
-
-time.sleep(1)
-
 right_motor = Motor("/dev/ttyACM1")
 
-time.sleep(5)
+#vars for overall position
+x = 0
+y = 0
 
-#figure out how to read all lines
+yCoor = float(input("Choose a new y coor (0 to quit) "))
+xCoor = float(input("Choose a new x coor (0 to quit) "))
 
-#left_motor.move(360)
-#time.sleep(.1)
-#right_motor.move(360)
+#moves in y-direction to user-designated position
+while yCoor != 0 and xCoor != 0: #need a better sentinel value... idk what would make most sense
+    #figure out how to do x coor using string length thingy
+    dy = (yCoor - y) / 1.3 #circumference of pulley
+    y = y + yCoor
 
-#left_motor.move(-360)
-#right_motor.move(-360)
+    changeLeft = -1
+    changeRight = 1
 
-for i in range(100):
-    left_motor.move(10)
-    right_motor.move(10)
-    print(left_motor.getPosition())
-    print(right_motor.getPosition())
+    if dy < 0:
+        changeLeft *= -1
+        changeRight *= -1
+        dy *= -1
 
+    for i in range(int(dy * 360)):
+        left_motor.move(changeLeft)
+        right_motor.move(changeRight) 
 
+    print("Done moving!")
+    yCoor = float(input("Choose a new y coor (0 to quit) "))
+#    xCoor = float(input("Choose a new x coor (0 to quit) "))
