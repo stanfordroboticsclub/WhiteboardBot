@@ -46,8 +46,8 @@ left_motor = Motor("/dev/ttyACM0")
 right_motor = Motor("/dev/ttyACM1")
 
 #vars for overall position
-x = 0
 y = 0
+x = 0
 
 yCoor = float(input("Choose a new y coor (0 to quit) "))
 xCoor = float(input("Choose a new x coor (0 to quit) "))
@@ -56,7 +56,6 @@ xCoor = float(input("Choose a new x coor (0 to quit) "))
 while yCoor != 0 and xCoor != 0: #need a better sentinel value... idk what would make most sense
     #figure out how to do x coor using string length thingy
     dy = (yCoor - y) / 1.3 #circumference of pulley
-    y = y + yCoor
 
     changeLeft = -1
     changeRight = 1
@@ -65,7 +64,6 @@ while yCoor != 0 and xCoor != 0: #need a better sentinel value... idk what would
         changeLeft *= -1
         changeRight *= -1
         dy *= -1
-
     for i in range(int(dy * 360)):
         left_motor.move(changeLeft)
         right_motor.move(changeRight) 
