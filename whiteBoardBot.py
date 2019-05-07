@@ -2,15 +2,6 @@ from motorDriver import Motor
 import math
 
 
-WIDTH = 1000 # constant which keeps track of width - distance between motors of canvas                   
-HEIGHT = 1000 # constant which keeps track of height of canvas                                          
-CIRCUMFERENCE = 1.3 # 13 millimeters                                                                     
-
-global_string_lengths = StringLengths();
-globalX = 0 # global variable to hold x coordinate of robot                                              
-globalY = 0 # global variable to hold y coordinate of robot 
-
-
 # Default is upper left corner
 class StringLengths:
     def __init__(self):
@@ -22,6 +13,15 @@ class Rotations:
     def __init__(self):
         self.left = 0
         self.right = 0
+
+
+WIDTH = 1000 # constant which keeps track of width - distance between motors of canvas                   
+HEIGHT = 1000 # constant which keeps track of height of canvas                                          
+CIRCUMFERENCE = 1.3 # 13 millimeters                                                                     
+
+global_string_lengths = StringLengths();
+globalX = 0 # global variable to hold x coordinate of robot                                              
+globalY = 0 # global variable to hold y coordinate of robot 
 
 
 class robot:
