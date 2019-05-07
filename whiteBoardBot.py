@@ -19,17 +19,15 @@ WIDTH = 1000 # constant which keeps track of width - distance between motors of 
 HEIGHT = 1000 # constant which keeps track of height of canvas                                          
 CIRCUMFERENCE = 1.3 # 13 millimeters                                                                     
 
-global_string_lengths = StringLengths();
-global_string_lengths.left = 0
-global_string_lengths.right = WIDTH
-globalX = 0 # global variable to hold x coordinate of robot                                              
-globalY = 0 # global variable to hold y coordinate of robot 
-
-
 class robot:
     def __init__(self, left_port, right_port):
         self.left_motor = Motor(left_port)
         self.right_motor = Motor(right_port)
+        self.global_string_lengths = StringLengths()
+        self.global_string_lengths.left = 0
+        self.global_string_lengths.right = WIDTH
+        self.globalX = 0 # global variable to hold x coordinate of robot                              
+        self.globalY = 0 # global variable to hold y coordinate of robot 
 
     # function to calculate left and right string lengths given an x and a y coordinate.                
     def coordinate_to_string_length(self, x, y):
@@ -54,14 +52,14 @@ class robot:
 
     def moveTo(self, xCord, yCord):
         new_string_pair = self.coordinate_to_string_length(xCord, yCord)
-        string_pair_change = self.get_string_length_change(global_string_lengths, new_string_pair)
-        rotations_pair_change = self.get_rotations_in_degrees(global_string_lengths, new_string_pair)
+        string_pair_change = self.get_string_length_change(self.global_string_lengths, new_string_pair)
+        rotations_pair_change = self.get_rotations_in_degrees(self.global_string_lengths, new_string_pair)
         self.left_motor.move(rotations_pair_change.left)
         self.right_motor.move(rotations_pair_change.right)
 
-        globalX = xCord
-        globalY = yCord
-        global_string_lengths = new_string_pair
+        self.globalX = xCord
+        self.globalY = yCord
+        self.global_string_lengths = new_string_pair
 
 wbb = robot("/dev/ttyACM0", "/dev/ttyACM1") #WhiteBoard Bot
 
