@@ -1,9 +1,9 @@
-from motorDriver import motor
+from motorDriver import Motor
 
 class robot:
     def __init__(self, left_port, right_port):
-        left_motor = Motor(left_port)
-        right_motor = Motor(right_port)
+        self.left_motor = Motor(left_port)
+        self.right_motor = Motor(right_port)
 
 wbb = robot("/dev/ttyACM0", "/dev/ttyACM1") #WhiteBoard Bot
 
@@ -27,8 +27,8 @@ while yCoor != 0 and xCoor != 0: #need a better sentinel value... idk what would
         changeRight *= -1
         dy *= -1
     for i in range(int(dy * 360)):
-        left_motor.move(changeLeft)
-        right_motor.move(changeRight) 
+        wbb.left_motor.move(changeLeft)
+        wbb.right_motor.move(changeRight) 
 
     print("Done moving!")
     yCoor = float(input("Choose a new y coor (0 to quit) "))
